@@ -1,0 +1,47 @@
+﻿<md-dialog>
+    <form name="roboForm" novalidate ng-submit="roboForm.$valid" ng-cloak>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Cadastro Robô</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <!-- we are using ng-model to bind this view and the 'robos model -->
+
+                <md-input-container class="md-block" >
+                    <label>Código</label>
+                    <input name="Id" id="Id" type="number" ng-model="Id" disabled >
+
+                </md-input-container>
+
+                <md-input-container class="md-block" md-is-error="roboForm.Descricao.$invalid && (roboForm.$submitted)">                    
+                    <label>Descrição</label>                    
+                    <input name="Descricao" id="Descricao" type="text" ng-model="Descricao" ng-required="true" md-maxlength="20">
+
+                    <div ng-messages="roboForm.Descricao.$error" ng-if="roboForm.$submitted">
+                        <div ng-message="required">Preencha este campo!</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-is-error="roboForm.MacAddress.$invalid && (roboForm.$submitted)">                    
+                    <label>Mac Address</label>                    
+                    <input name="MacAddress" id="MacAddress" type="text" ng-model="MacAddress" ng-required="true" md-maxlength="25">
+
+                    <div ng-messages="roboForm.MacAddress.$error" ng-if="roboForm.$submitted">
+                        <div ng-message="required">Preencha este campo!</div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">Cancelar</md-button>
+            <md-button type="submit" ng-click="roboForm.$valid && salvarRobo()" class="md-primary">Salvar</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

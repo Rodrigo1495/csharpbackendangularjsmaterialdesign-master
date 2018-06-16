@@ -1,0 +1,28 @@
+﻿<md-dialog >
+    <form name="manobraForm" novalidate ng-submit="manobraForm.$valid" ng-cloak>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Excluir manobras relacionadas ao robô</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="form-group" layout="row" flex>
+                    <md-input-container class="md-block" >
+                        <label>Robô</label>
+                        <md-select placeholder="Selecione o robo" ng-model="roboExcluir" required name="robos" ng-model-options="{trackBy: '$value.Id' }" md-on-open="loadRobos()" style="min-width: 600px;">
+                            <md-option ng-value="robo" ng-repeat="robo in robos">{{robo.Descricao}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">Cancelar</md-button>
+            <md-button type="submit" ng-click="manobraForm.$valid && excluirManobraPorRobo($event, roboExcluir.Id)" class="md-primary">Excluir</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

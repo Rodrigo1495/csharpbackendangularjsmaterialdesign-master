@@ -1,0 +1,66 @@
+﻿<md-dialog >
+    <form name="manobraForm" novalidate ng-submit="manobraForm.$valid" ng-cloak>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Cadastro Manobra</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <div layout-gt-xs="row">
+
+                    <md-input-container class="md-block">
+                        <label>Código</label>
+                        <input name="Id" id="Id" type="number" ng-model="Id" disabled>
+                    </md-input-container>
+
+                    <div flex-gt-xs>
+                        <md-input-container>
+                            <label>Data início</label>
+                            <md-datepicker ng-model="DataInicio" md-placeholder="Digite a data" md-open-on-focus></md-datepicker>
+                        </md-input-container>
+                    </div>
+
+                    <div flex-gt-xs>
+                        <md-input-container>
+                            <label>Data final</label>
+                            <md-datepicker ng-model="DataFim" md-placeholder="Digite a data" md-open-on-focus></md-datepicker>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <md-input-container class="md-block" md-is-error="manobraForm.Descricao.$invalid && (manobraForm.$submitted)">
+                    <label>Descrição</label>
+                    <input name="Descricao" id="Descricao" type="text" ng-model="Descricao" ng-required="true" md-maxlength="100">
+
+                    <div ng-messages="manobraForm.Descricao.$error" ng-if="manobraForm.$submitted">
+                        <div ng-message="required">Preencha este campo!</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Observacao</label>
+                    <textarea ng-model="Observacao" md-maxlength="150" rows="1" md-select-on-focus></textarea>
+                </md-input-container>
+
+                <div class="form-group" layout="row" flex>
+                    <md-input-container class="md-block" >
+                        <label>Robô</label>
+                        <md-select placeholder="Selecione o robo" ng-model="robo" required name="robos" ng-model-options="{trackBy: '$value.Id' }" md-on-open="loadRobos()" style="min-width: 600px;">
+                            <md-option ng-value="robo" ng-repeat="robo in robos">{{robo.Descricao}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">Cancelar</md-button>
+            <md-button type="submit" ng-click="manobraForm.$valid && salvarManobra()" class="md-primary">Salvar</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

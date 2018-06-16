@@ -1,0 +1,65 @@
+﻿<div layout="row" ng-controller="manobraController" ng-cloak>
+
+    <div flex="10"></div>
+
+    <div flex="80" class='m-20px-0'>
+
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <!-- page title -->
+                <div flex md-truncate>
+                    <h3 class="md-headline">Manobras</h3>
+                </div>
+                <md-button class="md-raised" ng-click="showFormExcluirPorRobo()">Excluir por robô</md-button>  
+                <md-button class="md-raised" ng-click="showNovaManobraForm()">Novo</md-button>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block m-b-0px">
+            <form ng-submit="pesquisarManobra()">
+                <label>Buscar manobra...</label>
+                <input ng-model="manobra_search_keywords">
+            </form>
+        </md-input-container>
+
+        <div class="jumbotron">
+            <table ng-show="manobras.length > 0" class="table table-striped">
+                <tr>
+                    <th><a href="" ng-click="ordenarPor('manobra.Id')">Id</a></th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                    <th>Descrição</th>
+                    <th>Robô</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="manobra in manobras | orderBy: criterioDeOrdenacao:direcaoOrdenacao" ng-dblclick="editarManobra(manobra.Id)">
+                    <td width="45px">{{manobra.Id}}</td>
+                    <td width="130px">{{manobra.DataInicio | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                    <td width="130px">{{manobra.DataFim | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                    <td width="170px">{{manobra.Descricao}}</td>
+                    <td width="140px">{{manobra.Robos.Descricao}}</td>
+                    <div class="md-secondary-container">
+                        <td width="50px">
+                            <md-button class="md-fab md-mini md-primary" ng-click="editarManobra(manobra.Id)" aria-label="Editar">
+                                <md-icon md-svg-src="app/assets/img/edit.svg"></md-icon>
+                            </md-button>
+                        </td>
+                        <td width="50px">
+                            <md-button class="md-fab md-mini" ng-click="removerManobra($event, manobra.Id)" aria-label="Remover" size="200px">
+                                <md-icon md-svg-src="app/assets/img/trash.svg"></md-icon>
+                            </md-button>
+                        </td>
+                    </div>
+                </tr>
+            </table>
+        </div>
+
+        <cl-paging flex cl-pages="paging.total" , cl-steps="5" , cl-page-changed="paging.onPageChanged()" , cl-align="center center"
+            , cl-current-page="paging.current"></cl-paging>
+
+    </div>
+
+    <div flex="10"></div>
+</div>
+<!-- end row -->

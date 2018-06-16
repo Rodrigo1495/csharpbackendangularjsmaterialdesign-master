@@ -1,0 +1,57 @@
+﻿<div layout="row" ng-controller="robosController" ng-cloak>
+    
+    <div flex="10"></div>
+
+    <div flex="80" class='m-20px-0'>
+
+        <!-- page title & 'create robos' button -->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <!-- page title -->
+                <div flex md-truncate>
+                    <h3 class="md-headline">Robôs</h3>
+                </div>
+
+                <md-button class="md-raised" ng-click="showNovoRoboForm()">Novo</md-button>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block m-b-0px">
+            <form ng-submit="pesquisarRobo()">
+                <label>Buscar robô...</label>
+                <input ng-model="robo_search_keywords">
+            </form>
+        </md-input-container>
+
+        <md-content flex>
+            <!-- show robos record list -->
+            <md-list >
+                <md-list-item class="md-3-line" ng-repeat="robo in robos">
+
+                    <!-- robo information -->
+                    <div class="md-list-item-text" ng-dblclick="editarRobo(robo.Id)">
+                        <h3>{{robo.Id}}</h3>
+                        <h4>{{robo.Descricao}}</h4>
+                        <h4>{{robo.MacAddress}}</h4>
+                    </div>
+
+                    <div class="md-secondary-container">
+                        <md-button class="md-fab md-mini md-primary" ng-click="editarRobo(robo.Id)" aria-label="Editar">
+                            <md-icon md-svg-src="app/assets/img/edit.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-fab md-mini" ng-click="removerRobo($event, robo.Id)" aria-label="Remover">
+                            <md-icon md-svg-src="app/assets/img/trash.svg"></md-icon>
+                        </md-button>
+ 
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+               
+         <cl-paging flex cl-pages="paging.total", cl-steps="5", cl-page-changed="paging.onPageChanged()", cl-align="center center", cl-current-page="paging.current"></cl-paging>
+
+    </div>
+
+    <div flex="10"></div>
+</div> <!-- end row -->
